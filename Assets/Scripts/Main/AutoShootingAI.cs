@@ -21,7 +21,6 @@ public class AutoShootingAI : MonoBehaviour
         Quaternion bulletRotation = Quaternion.Euler(0f, bulletRotationY, 0f);
         GameObject b1 = Instantiate(bullet, shootPoint.position, bulletRotation);
 
-        print("sds");
         StartCoroutine(Shoot());
     }
 }
