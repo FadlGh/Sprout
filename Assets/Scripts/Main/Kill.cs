@@ -6,6 +6,9 @@ public class Kill : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // kill player
+        if (collision.CompareTag("Player"))
+        {
+            GameMaster.Instance.KillPlayer();
+        }
     }
 }
