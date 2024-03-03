@@ -7,6 +7,7 @@ public class GameMaster : MonoBehaviour
 
     public static GameMaster Instance;
     public int plantsPlanted = 0;
+    public Vector3 respawnPoint;
 
     void Awake()
     {
@@ -19,6 +20,8 @@ public class GameMaster : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        respawnPoint = GameObject.FindWithTag("Player").transform.position;
     }
 
     void Update()
@@ -32,7 +35,7 @@ public class GameMaster : MonoBehaviour
 
     public void KillPlayer()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameObject.FindWithTag("Player").transform.position = respawnPoint;
         plantsPlanted = 0;
     }
 }
