@@ -1,62 +1,40 @@
+using System.Collections;
 using UnityEngine;
 
 public class PatrolAI : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private Transform[] waypoints;
-    [SerializeField] private float stoppingDistance;
+    public Transform pointA;
+    public Transform pointB;
+    public float speed = 2f;
 
-    private int currentWaypointIndex = 0;
-    private Rigidbody2D rb;
-    private bool isPatrolingForward = true;
-    private bool isFacingRight = true;
-    private Vector2 direction;
-    private Vector2 targetPosition;
+    private Transform target;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        targetPosition = waypoints[0].position;
-        direction = (targetPosition - (Vector2)transform.position).normalized;
+        target = pointA; 
+        StartCoroutine(Patrol());
     }
 
-    void FixedUpdate()
+    IEnumerator Patrol()
     {
-        if (Vector2.Distance(transform.position, targetPosition) < stoppingDistance)
+        while (true)
         {
-            targetPosition = waypoints[currentWaypointIndex].position;
-            direction = (targetPosition - (Vector2)transform.position).normalized;
+            transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-            if (isPatrolingForward)
+            if (Vector3.Distance(transform.position, target.position) < 0.1f)
             {
-                currentWaypointIndex++;
-                if (currentWaypointIndex >= waypoints.Length)
-                {
-                    currentWaypointIndex = waypoints.Length - 2;
-                    isPatrolingForward = false;
-                    Flip();
-                }
+                target = (target == pointA) ? pointB : pointA;
+                Flip();
+
+                yield return new WaitForSeconds(1f);
             }
-            else
-            {
-                currentWaypointIndex--;
-                if (currentWaypointIndex < 0)
-                {
-                    currentWaypointIndex = 1;
-                    isPatrolingForward = true;
-                    Flip();
-                }
-            }
-        }
-        else
-        {
-            rb.velocity = speed * Time.fixedDeltaTime * direction;
+
+            yield return null;
         }
     }
 
     private void Flip()
     {
-        isFacingRight = !isFacingRight;
         Vector3 localScale = transform.localScale;
         localScale.x *= -1f;
         transform.localScale = localScale;

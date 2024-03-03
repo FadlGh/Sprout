@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -30,7 +29,7 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator DeathTimer()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         die();
     }
 
