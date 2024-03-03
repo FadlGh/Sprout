@@ -33,5 +33,6 @@ public class GameMaster : MonoBehaviour
     public void KillPlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        plantsPlanted = 0;
     }
 }

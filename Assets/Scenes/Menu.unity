@@ -318,7 +318,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 3f852b5e25c8c1c47aa5a0acd1ac3598, type: 3}
     volume: 1
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   - name: Die
     clip: {fileID: 8300000, guid: af2739c7a1215534db146800b54f6345, type: 3}
