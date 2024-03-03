@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             CreateDust();
             jumpBufferTimeCounter = 0f;
+            AudioManager.instance.Play("Jump");
         }
 
         if (rb.velocity.y < 0f)
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour
         {
             CreateDust();
             StartCoroutine(Dash());
+            AudioManager.instance.Play("Jump");
         }
 
         Flip();

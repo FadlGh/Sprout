@@ -9,9 +9,11 @@ public class Plant : MonoBehaviour
     {
         Collider2D overlappingCollider = Physics2D.OverlapCircle(transform.position, plantingRadius, plantLayer);
 
-        if (overlappingCollider != null && Input.GetKeyDown(KeyCode.E))
+        if (overlappingCollider != null && Input.GetKeyDown(KeyCode.E) && !overlappingCollider.GetComponent<Animator>().GetBool("Grown"))
         {
             overlappingCollider.GetComponent<Animator>().SetBool("Grown", true);
+            GameMaster.Instance.plantsPlanted++;
+            AudioManager.instance.Play("Plant");
         }
     }
 

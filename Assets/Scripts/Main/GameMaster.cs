@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
+    [SerializeField] private GameObject winUi;
+
     public static GameMaster Instance;
+    public int plantsPlanted = 0;
 
     void Awake()
     {
@@ -16,6 +19,15 @@ public class GameMaster : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Update()
+    {
+        if (plantsPlanted >= 10)
+        {
+            if (!winUi) return;
+            winUi.SetActive(true);
+        }   
     }
 
     public void KillPlayer()
