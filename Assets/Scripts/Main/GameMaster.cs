@@ -36,6 +36,5 @@ public class GameMaster : MonoBehaviour
     public void KillPlayer()
     {
         GameObject.FindWithTag("Player").transform.position = respawnPoint;
-        plantsPlanted = 0;
     }
 }
